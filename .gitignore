@@ -1,0 +1,24 @@
+# Environment variables — contains passwords, never commit
+.env
+
+# Virtual environment — too large for Git
+venv/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Saved ML models
+*.pkl
+*.joblib
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Trained ML models
+models/*.joblib

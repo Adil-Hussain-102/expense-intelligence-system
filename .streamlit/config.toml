@@ -1,0 +1,12 @@
+[ui]
+hideSidebarNav = true
+
+[server]
+runOnSave = true
+
+[theme]
+primaryColor = "#6C63FF"
+backgroundColor = "#0F1117"
+secondaryBackgroundColor = "#1E2130"
+textColor = "#FAFAFA"
+font = "sans serif"
