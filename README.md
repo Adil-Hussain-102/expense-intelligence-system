@@ -163,9 +163,13 @@ pytest tests/ -v
 
 ## 👨‍💻 Author
 
-**Faisal**  
+## 👨‍💻 Author
+
+**Adil Hussain**  
 BS Artificial Intelligence  
 Pakistan
+
+[![GitHub](https://img.shields.io/badge/GitHub-Adil--Hussain--102-black)](https://github.com/Adil-Hussain-102)
 
 ---
 
