@@ -1,8 +1,11 @@
 # dashboard/main.py
 
 import streamlit as st
+import sys
+import os
 
-# Force refresh when data changes
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 if "refresh_dashboard" not in st.session_state:
     st.session_state["refresh_dashboard"] = 0
 
@@ -15,20 +18,13 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    /* ── Global ── */
     html, body, [class*="css"] {
         font-family: 'Segoe UI', sans-serif;
     }
 
-    /* ── Hide Streamlit default elements ── */
     #MainMenu { visibility: hidden; }
     footer     { visibility: hidden; }
-    
-    
 
-    header     { visibility: hidden; }
-
-    /* ── Animated gradient background ── */
     .main {
         background: linear-gradient(135deg, #0F1117 0%, #1E2130 50%, #0F1117 100%);
         background-size: 400% 400%;
@@ -41,7 +37,6 @@ st.markdown("""
         100% { background-position: 0% 50%; }
     }
 
-    /* ── Metric cards ── */
     div[data-testid="metric-container"] {
         background: linear-gradient(135deg, #1E2130, #252A40);
         border: 1px solid #6C63FF44;
@@ -69,7 +64,6 @@ st.markdown("""
         font-weight: 700 !important;
     }
 
-    /* ── Sidebar ── */
     section[data-testid="stSidebar"] {
         background: linear-gradient(180deg, #13152A 0%, #1A1D2E 100%);
         border-right: 1px solid #6C63FF33;
@@ -81,7 +75,21 @@ st.markdown("""
         padding: 8px 0 !important;
     }
 
-    /* ── Buttons ── */
+    /* Style the sidebar toggle button */
+    button[data-testid="baseButton-header"] {
+        background: linear-gradient(135deg, #6C63FF, #4ECDC4) !important;
+        border-radius: 50% !important;
+        color: white !important;
+        border: none !important;
+    }
+
+    /* Style collapsed control arrow */
+    [data-testid="collapsedControl"] {
+        background: linear-gradient(135deg, #6C63FF, #4ECDC4) !important;
+        border-radius: 0 8px 8px 0 !important;
+        color: white !important;
+    }
+
     .stButton > button {
         background: linear-gradient(135deg, #6C63FF, #4ECDC4);
         color: white !important;
@@ -99,21 +107,18 @@ st.markdown("""
         box-shadow: 0 8px 25px rgba(108, 99, 255, 0.5) !important;
     }
 
-    /* ── Primary button ── */
     .stButton > button[kind="primary"] {
         background: linear-gradient(135deg, #6C63FF, #9B59B6) !important;
         font-size: 16px !important;
         padding: 14px 28px !important;
     }
 
-    /* ── DataFrames ── */
     .stDataFrame {
         border-radius: 12px !important;
         overflow: hidden;
         border: 1px solid #6C63FF22 !important;
     }
 
-    /* ── Headers ── */
     h1 {
         background: linear-gradient(135deg, #6C63FF, #4ECDC4);
         -webkit-background-clip: text;
@@ -128,7 +133,6 @@ st.markdown("""
         font-weight: 700 !important;
     }
 
-    /* ── Alert boxes ── */
     .success-box {
         background: linear-gradient(135deg, #0D4F3F, #0A3D2E);
         border-left: 4px solid #10B981;
@@ -169,20 +173,17 @@ st.markdown("""
         font-weight: 500;
     }
 
-    /* ── Progress bar ── */
     .stProgress > div > div {
         background: linear-gradient(90deg, #6C63FF, #4ECDC4) !important;
         border-radius: 10px !important;
     }
 
-    /* ── Divider ── */
     hr {
         border: none !important;
         border-top: 1px solid #6C63FF33 !important;
         margin: 24px 0 !important;
     }
 
-    /* ── Selectbox ── */
     .stSelectbox > div > div {
         background: #1E2130 !important;
         border: 1px solid #6C63FF44 !important;
@@ -190,7 +191,6 @@ st.markdown("""
         color: #FAFAFA !important;
     }
 
-    /* ── File uploader ── */
     .stFileUploader > div {
         background: #1E2130 !important;
         border: 2px dashed #6C63FF66 !important;
@@ -202,17 +202,14 @@ st.markdown("""
         border-color: #6C63FF !important;
     }
 
-    /* ── Spinner ── */
     .stSpinner > div {
         border-top-color: #6C63FF !important;
     }
 
-    /* ── Checkbox ── */
     .stCheckbox > label > div[data-testid="stCheckbox"] {
         border-color: #6C63FF !important;
     }
 
-    /* ── Tab styling ── */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
         background: #1E2130;
@@ -233,14 +230,12 @@ st.markdown("""
         color: white !important;
     }
 
-    /* ── Multiselect ── */
     .stMultiSelect > div {
         background: #1E2130 !important;
         border: 1px solid #6C63FF44 !important;
         border-radius: 10px !important;
     }
 
-    /* ── Glowing card effect ── */
     .glow-card {
         background: linear-gradient(135deg, #1E2130, #252A40);
         border: 1px solid #6C63FF33;
@@ -255,7 +250,6 @@ st.markdown("""
         box-shadow: 0 0 40px rgba(108, 99, 255, 0.25);
     }
 
-    /* ── Pulse animation for anomaly badge ── */
     @keyframes pulse {
         0%   { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
         70%  { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
@@ -273,7 +267,6 @@ st.markdown("""
         animation: pulse 2s infinite;
     }
 
-    /* ── Fade in animation ── */
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(20px); }
         to   { opacity: 1; transform: translateY(0); }
@@ -282,47 +275,7 @@ st.markdown("""
     .fade-in {
         animation: fadeIn 0.5s ease forwards;
     }
-
-
 </style>
-""", unsafe_allow_html=True)
-
-st.markdown("""
-<div id="custom-sidebar-btn" onclick="toggleSidebar()" style="
-    position: fixed;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 28px;
-    height: 60px;
-    background: linear-gradient(135deg, #6C63FF, #4ECDC4);
-    border-radius: 0 12px 12px 0;
-    cursor: pointer;
-    z-index: 999999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 4px 0 15px rgba(108,99,255,0.5);
-">
-    <span id="arrow-icon" style="color:white; font-size:16px;">❯</span>
-</div>
-
-<script>
-var sidebarVisible = true;
-function toggleSidebar() {
-    var sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    var arrow = window.parent.document.getElementById('arrow-icon');
-    if (sidebarVisible) {
-        sidebar.style.transform = 'translateX(-100%)';
-        arrow.innerHTML = '❯';
-        sidebarVisible = false;
-    } else {
-        sidebar.style.transform = 'translateX(0)';
-        arrow.innerHTML = '❮';
-        sidebarVisible = true;
-    }
-}
-</script>
 """, unsafe_allow_html=True)
 
 
@@ -396,10 +349,6 @@ with st.sidebar:
 
 
 # ── Page Routing ────────────────────────────────────────
-import sys
-import os
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 if "Upload" in page:
     from pages.upload import show_upload_page
     show_upload_page()
