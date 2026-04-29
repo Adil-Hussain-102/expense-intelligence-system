@@ -279,6 +279,19 @@ st.markdown("""
     .fade-in {
         animation: fadeIn 0.5s ease forwards;
     }
+
+    /* Hide sidebar collapse button */
+button[kind="header"] {
+    display: none !important;
+}
+
+section[data-testid="stSidebar"] > div:first-child {
+    width: 300px !important;
+}
+
+[data-testid="collapsedControl"] {
+    display: none !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
