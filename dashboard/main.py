@@ -282,7 +282,30 @@ st.markdown("""
     .fade-in {
         animation: fadeIn 0.5s ease forwards;
     }
-            
+
+    /* Make sidebar toggle arrow visible and stylish */
+[data-testid="collapsedControl"] {
+    display: flex !important;
+    visibility: visible !important;
+    background: linear-gradient(135deg, #6C63FF, #4ECDC4) !important;
+    border-radius: 0 12px 12px 0 !important;
+    width: 24px !important;
+    height: 60px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    position: fixed !important;
+    left: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 999999 !important;
+    box-shadow: 4px 0 15px rgba(108, 99, 255, 0.4) !important;
+}
+
+[data-testid="collapsedControl"] svg {
+    color: white !important;
+    fill: white !important;
+}
 
 </style>
 """, unsafe_allow_html=True)
