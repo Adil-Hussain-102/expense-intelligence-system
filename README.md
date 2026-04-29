@@ -161,12 +161,12 @@ pytest tests/ -v
 
 ---
 
-## 👨‍💻 Author
 
 ## 👨‍💻 Author
 
 **Adil Hussain**  
-BS Artificial Intelligence  
+BS Artificial Intelligence
+Aror University of Art, Architecture, Design, and Heritage, Sukkur  
 Pakistan
 
 [![GitHub](https://img.shields.io/badge/GitHub-Adil--Hussain--102-black)](https://github.com/Adil-Hussain-102)
