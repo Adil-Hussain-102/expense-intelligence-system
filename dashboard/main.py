@@ -23,6 +23,29 @@ st.markdown("""
     /* ── Hide Streamlit default elements ── */
     #MainMenu { visibility: hidden; }
     footer     { visibility: hidden; }
+    
+    /* Force sidebar to always stay visible - cannot be collapsed */
+section[data-testid="stSidebar"] {
+    display: block !important;
+    visibility: visible !important;
+    width: 300px !important;
+    min-width: 300px !important;
+    transform: none !important;
+}
+
+/* Hide the collapse/expand arrow button completely */
+button[data-testid="collapsedControl"],
+[data-testid="collapsedControl"],
+button[kind="header"],
+.st-emotion-cache-1dp5vir,
+.st-emotion-cache-6tkfeg,
+[class*="collapsedControl"] {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
     header     { visibility: hidden; }
 
     /* ── Animated gradient background ── */
@@ -279,19 +302,15 @@ st.markdown("""
     .fade-in {
         animation: fadeIn 0.5s ease forwards;
     }
-
-    /* Hide sidebar collapse button */
-button[kind="header"] {
-    display: none !important;
-}
-
-section[data-testid="stSidebar"] > div:first-child {
+            
+/* Nuclear option - sidebar always visible */
+[data-testid="stSidebar"][aria-expanded="false"] {
+    display: block !important;
+    margin-left: 0 !important;
+    transform: translateX(0) !important;
     width: 300px !important;
 }
 
-[data-testid="collapsedControl"] {
-    display: none !important;
-}
 </style>
 """, unsafe_allow_html=True)
 
