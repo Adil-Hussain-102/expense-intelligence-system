@@ -353,18 +353,22 @@ with st.sidebar:
 
 
 # ── Page Routing ────────────────────────────────────────
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 if "Upload" in page:
-    from dashboard.pages.upload import show_upload_page
+    from pages.upload import show_upload_page
     show_upload_page()
 
 elif "Dashboard" in page:
-    from dashboard.pages.dashboard import show_dashboard_page
+    from pages.dashboard import show_dashboard_page
     show_dashboard_page()
 
 elif "Anomalies" in page:
-    from dashboard.pages.anomalies import show_anomalies_page
+    from pages.anomalies import show_anomalies_page
     show_anomalies_page()
 
 elif "Forecast" in page:
-    from dashboard.pages.forecast import show_forecast_page
+    from pages.forecast import show_forecast_page
     show_forecast_page()
