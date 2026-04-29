@@ -9,6 +9,7 @@ engine = create_engine(
     pool_size=5,
     pool_pre_ping=True,
     echo=Config.DEBUG,
+    connect_args={"sslmode": "require"} if "neon.tech" in Config.DB_HOST else {},
 )
 
 SessionLocal = sessionmaker(
